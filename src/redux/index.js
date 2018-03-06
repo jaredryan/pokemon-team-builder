@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+// import data from "./data.json";
 
 export const search = pokemon => {
     return dispatch => {
@@ -9,7 +10,7 @@ export const search = pokemon => {
             type: "LOADING"
         });
         setTimeout(function(){
-            axios.get(`http://pokeapi.salestock.net/api/v2/pokemon/${pokemon}`)
+            axios.get(`http://cors.vschool.io?url=https://pokeapi.co/api/v2/pokemon/${pokemon}`)
             .then(response => {
                 dispatch({
                     type: "SEARCH",
@@ -24,6 +25,11 @@ export const search = pokemon => {
                     error: error.response.statusText
                 });
             });
+            // // Axios stub
+            // dispatch({
+            //     type: "SEARCH",
+            //     pokemon: data
+            // });
         }, 1000)
     }
 }

@@ -12,7 +12,7 @@ class List extends Component {
         return list !== [] && list.map((pokemon, index) => {
            return (<Pokemon
                         key={index + pokemon.name}
-                        data={pokemon.data}
+                        data={pokemon}
                         type={type}
                   />);
        })
@@ -26,13 +26,13 @@ class List extends Component {
       <div className="listContainer">
         <div className="chosenList">
             <h3>Chosen Pokémon</h3>
-            <ul>
+            <ul className="list">
                 {chosenList}
             </ul>
         </div>
         <div className="potentialList">
             <h3>Pokémon with Potential</h3>
-            <ul>
+            <ul className="list">
                 {potentialList}
             </ul>
         </div>

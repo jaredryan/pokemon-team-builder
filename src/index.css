@@ -43,6 +43,7 @@ nav ul {
     padding-top: 0;
     padding-left: 0;
 }
+
 .standard-nav > a, nav ul {
     display: flex;
     width: 50%;
@@ -241,9 +242,11 @@ footer h5 {
     width: 100%;
 }
 
-.frontImage, .backImage {
-    width: 200px;
-    height: 200px;
+.frontImage {
+    width: 100px;
+    height: 100px;
+    zoom: 100%;
+    margin: auto;
 }
 
 .startContainer {
@@ -282,6 +285,134 @@ footer h5 {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.pokedexContainer ul, .pokemon ul, .battle ul, ul.list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.pokedexResult p,
+.pokedexResult ul,
+.pokedexResult h6,
+.battle p,
+.battle ul,
+.battle h6 {
+    margin-top: 10px;
+}
+
+.pokedexContainer,
+.singleBattleContainer,
+.doubleBattleContainer, {
+    font-size: 18px;
+    font-weight: 300;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.pokedexContainer h5,
+.singleBattleContainer h5,
+.doubleBattleContainer h5 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.pokedexContainer h6,
+.singleBattleContainer h6,
+.doubleBattleContainer h6 {
+    font-weight: 300;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 14px;
+
+}
+
+.pokemon {
+    width: 300px;
+    margin: auto;
+}
+
+.pokedexContainer button,
+.singleBattleContainer button,
+.doubleBattleContainer button {
+    width: 200px;
+    height: 36px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: rgb(80, 80, 80);
+    border: 1px solid silver;
+    background-color: white;
+}
+
+.pokedexContainer button:hover,
+.singleBattleContainer button:hover,
+.doubleBattleContainer button:hover {
+    cursor: pointer;
+    color: rgb(100, 100, 0);
+    border: 2px solid rgb(100, 100, 0);
+    background-color: rgb(200, 200, 255);
+}
+
+.pokemon, .pokemon h5, .pokemon li {
+    font-size: 16px;
+}
+
+.pokemon button {
+    width: 120px;
+    height: 36px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: rgb(80, 80, 80);
+    border: 1px solid silver;
+    background-color: white;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.pokemon button.delete {
+    margin-top: 0px;
+}
+
+.pokemon button:hover {
+    cursor: pointer;
+    color: rgb(100, 100, 0);
+    border: 2px solid rgb(100, 100, 0);
+    background-color: rgb(200, 200, 255);
+}
+
+.pokemon h5 {
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+.pokemon span {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 300;
+}
+
+.pokemon li {
+    font-size: 16px;
+}
+
+.chosenList ul.list,
+.potentialList ul.list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+
+
+
+
+
+
 
 /* Remove picture in top left navbar */
 @media (max-width: 740px) {

@@ -1,71 +1,342 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { removeSlot1 } from './redux';
 
 class SingleBattles extends Component {
     constructor() {
         super();
+        this.state = {
+            movesWasClicked: false
+        }
         
+        this.handleMoveClick = this.handleMoveClick.bind(this);
         this.determineAttackStrengths = this.determineAttackStrengths.bind(this);
         this.determineAttackWeaknesses = this.determineAttackWeaknesses.bind(this);
-        this.determineDefenseStrengths = this.determineDefenseStrengths.bind(this);
-        this.determineDefenseWeaknesses = this.determineDefenseWeaknesses.bind(this);
+        this.determineDefenses = this.determineDefenses.bind(this);
     }
     
-    determineAttackStrengths() {
-        
+    handleMoveClick() {
+        this.setState(prevState => {
+            return {
+                movesWasClicked: !prevState.movesWasClicked
+            }
+        })
     }
     
-    determineAttackWeaknesses() {
-        
+    determineAttackStrengths(type) {
+        switch (type) {
+            case "normal":
+                return "none";
+            case "fire":
+                return "grass, ice, bug, steel";
+            case "water":
+                return "fire, ground, rock";
+            case "electric":
+                return "water, flying";
+            case "grass":
+                return "water, ground, rock";
+            case "ice":
+                return "grass, ground, flying, dragon";
+            case "fighting":
+                return "normal, ice, rock, dark, steel";
+            case "poison":
+                return "grass, fairy";
+            case "ground":
+                return "fire, electric, poison, rock, steel";
+            case "flying":
+                return "grass, fighting, bug";
+            case "psychic":
+                return "fighting, poison";
+            case "bug":
+                return "grass, psychic, dark";
+            case "rock":
+                return "fire, ice, flying, bug";
+            case "ghost":
+                return "psychic, ghost";
+            case "dragon":
+                return "dragon";
+            case "dark":
+                return "psychic, ghost";
+            case "steel":
+                return "ice, rock, fairy";
+            case "fairy":
+                return "fighting, dragon, dark";
+        }
     }
     
-    determineDefenseStrengths() {
-        
+    determineAttackWeaknesses(type) {
+        switch (type) {
+            case "normal":
+                return "rock: 1/2, ghost: 0, steel: 1/2";
+            case "fire":
+                return "fire: 1/2, water: 1/2, rock: 1/2, dragon: 1/2";
+            case "water":
+                return "water: 1/2, grass: 1/2, dragon: 1/2";
+            case "electric":
+                return "electric: 1/2, grass: 1/2, ground: 0, dragon: 1/2";
+            case "grass":
+                return "fire: 1/2, grass: 1/2, poison: 1/2, flying: 1/2, bug: 1/2, dragon: 1/2, steel: 1/2";
+            case "ice":
+                return "fire: 1/2, water: 1/2, ice: 1/2, steel: 1/2";
+            case "fighting":
+                return "poison: 1/2, flying: 1/2, psychic: 1/2, bug: 1/2, ghost: 0, fairy: 1/2";
+            case "poison":
+                return "poison: 1/2, ground: 1/2, rock: 1/2, ghost: 1/2, steel: 0";
+            case "ground":
+                return "grass: 1/2, flying: 0, bug: 1/2";
+            case "flying":
+                return "electric: 1/2, rock: 1/2, steel: 1/2";
+            case "psychic":
+                return "psychic: 1/2, dark: 0, steel: 1/2";
+            case "bug":
+                return "fire: 1/2, fighting: 1/2, poison: 1/2, flying: 1/2, ghost: 1/2, steel: 1/2, fairy: 1/2";
+            case "rock":
+                return "fighting: 1/2, ground: 1/2, steel: 1/2";
+            case "ghost":
+                return "normal: 0, dark: 1/2";
+            case "dragon":
+                return "steel: 1/2, fairy: 0";
+            case "dark":
+                return "fighting: 1/2, dark: 1/2, fairy: 1/2";
+            case "steel":
+                return "fire: 1/2, water: 1/2, electric: 1/2, steel: 1/2";
+            case "fairy":
+                return "fire: 1/2, poison: 1/2, steel: 1/2";
+        }
     }
     
-    determineDefenseWeaknesses() {
-        
+    determineDefenses(type, dict) {
+        switch (type) {
+            case "normal":
+                dict["fighting"] *= 2
+                dict["ghost"] *= 0
+            case "fire":
+                dict["fire"] *= 1/2
+                dict["water"] *= 2
+                dict["grass"] *= 1/2
+                dict["ice"] *= 1/2
+                dict["ground"] *= 2
+                dict["bug"] *= 1/2
+                dict["rock"] *= 2
+                dict["steel"] *= 1/2
+                dict["fairy"] *= 1/2
+            case "water":
+                dict["fire"] *= 1/2
+                dict["water"] *= 1/2
+                dict["electric"] *= 2
+                dict["grass"] *= 2
+                dict["ice"] *= 1/2
+                dict["steel"] *= 1/2
+            case "electric":
+                dict["electric"] *= 1/2
+                dict["ground"] *= 2
+                dict["flying"] *= 1/2
+                dict["steel"] *= 1/2
+            case "grass":
+                dict["fire"] *= 2
+                dict["water"] *= 1/2
+                dict["electric"] *= 1/2
+                dict["grass"] *= 1/2
+                dict["ice"] *= 2
+                dict["poison"] *= 2
+                dict["ground"] *= 1/2
+                dict["flying"] *= 2
+                dict["bug"] *= 2
+            case "ice":
+                dict["fire"] *= 2
+                dict["ice"] *= 1/2
+                dict["fighting"] *= 2
+                dict["rock"] *= 2
+                dict["steel"] *= 2
+            case "fighting":
+                dict["flying"] *= 2
+                dict["psychic"] *= 2
+                dict["bug"] *= 1/2
+                dict["rock"] *= 1/2
+                dict["dark"] *= 1/2
+                dict["fairy"] *= 2
+            case "poison":
+                dict["grass"] *= 1/2
+                dict["fighting"] *= 1/2
+                dict["poison"] *= 1/2
+                dict["ground"] *= 2
+                dict["psychic"] *= 2
+                dict["bug"] *= 1/2
+                dict["fairy"] *= 1/2
+            case "ground":
+                dict["water"] *= 2
+                dict["electric"] *= 0
+                dict["grass"] *= 2
+                dict["ice"] *= 2
+                dict["poison"] *= 1/2
+                dict["rock"] *= 1/2
+            case "flying":
+                dict["electric"] *= 2
+                dict["grass"] *= 1/2
+                dict["ice"] *= 2
+                dict["fighting"] *= 1/2
+                dict["ground"] *= 0
+                dict["bug"] *= 1/2
+                dict["rock"] *= 2
+            case "psychic":
+                dict["fighting"] *= 1/2
+                dict["psychic"] *= 1/2
+                dict["bug"] *= 2
+                dict["ghost"] *= 2
+                dict["dark"] *= 2
+            case "bug":
+                dict["fire"] *= 2
+                dict["grass"] *= 1/2
+                dict["fighting"] *= 1/2
+                dict["ground"] *= 1/2
+                dict["flying"] *= 2
+                dict["rock"] *= 2
+            case "rock":
+                dict["normal"] *= 1/2
+                dict["fire"] *= 1/2
+                dict["water"] *= 2
+                dict["grass"] *= 2
+                dict["fighting"] *= 2
+                dict["poison"] *= 1/2
+                dict["ground"] *= 2
+                dict["flying"] *= 1/2
+                dict["steel"] *= 2
+            case "ghost":
+                dict["normal"] *= 0
+                dict["fighting"] *= 0
+                dict["poison"] *= 1/2
+                dict["bug"] *= 1/2
+                dict["ghost"] *= 2
+                dict["dark"] *= 2
+            case "dragon":
+                dict["fire"] *= 1/2
+                dict["water"] *= 1/2
+                dict["electric"] *= 1/2
+                dict["grass"] *= 1/2
+                dict["ice"] *= 2
+                dict["dragon"] *= 2
+                dict["fairy"] *= 2
+            case "dark":
+                dict["fighting"] *= 2
+                dict["psychic"] *= 0
+                dict["bug"] *= 2
+                dict["ghost"] *= 1/2
+                dict["dark"] *= 1/2
+                dict["fairy"] *= 2
+            case "steel":
+                dict["normal"] *= 1/2
+                dict["fire"] *= 2
+                dict["grass"] *= 1/2
+                dict["ice"] *= 1/2
+                dict["fighting"] *= 2
+                dict["poison"] *= 0
+                dict["ground"] *= 2
+                dict["flying"] *= 1/2
+                dict["psychic"] *= 1/2
+                dict["bug"] *= 1/2
+                dict["rock"] *= 1/2
+                dict["dragon"] *= 1/2
+                dict["steel"] *= 1/2
+                dict["fairy"] *= 1/2
+            case "fairy":
+                dict["fighting"] *= 1/2
+                dict["poison"] *= 2
+                dict["bug"] *= 1/2
+                dict["dragon"] *= 0
+                dict["dark"] *= 1/2
+                dict["steel"] *= 2
+        }
+        return dict;
     }
     
     mapPokemontoSlot(pokemon) {
         let types = "";
-        
+        let attackStrengths = ""
+        let attackWeaknesses = ""
+        let dict = {
+            "normal": 1,
+            "fire": 1,
+            "water": 1,
+            "electric": 1,
+            "grass": 1,
+            "ice": 1,
+            "fighting": 1,
+            "poison": 1,
+            "ground": 1,
+            "flying": 1,
+            "psychic": 1,
+            "bug": 1,
+            "rock": 1,
+            "ghost": 1,
+            "dragon": 1,
+            "dark": 1,
+            "steel": 1,
+            "fairy": 1,
+        }
         for (let i = 0; i < pokemon.types.length; i++) {
             if (pokemon.types[i].slot === 1) {
-                types = pokemon.types[i].name + ", " + types
+                types = pokemon.types[i].type.name + ", " + types
             } else {
-                types += pokemon.types[i].name;
+                types += pokemon.types[i].type.name + ", ";
             }
+            attackStrengths += pokemon.types[i].type.name + ": " + this.determineAttackStrengths(pokemon.types[i].type.name) + "\n"
+            attackWeaknesses += pokemon.types[i].type.name + ": " + this.determineAttackWeaknesses(pokemon.types[i].type.name) + "\n"
+            dict = this.determineDefenses(pokemon.types[i].type.name, dict);
         }
         types = types.slice(0, types.length - 2);
         
+        const moves = pokemon.moves.map((move, i) => {
+            return (<li key={i + move.move.name}>
+                        <a href={move.move.url}>{move.move.name}</a>
+                    </li>);
+        });
+        
         const stats = pokemon.stats.map((stat, i) => {
-            return (<li>
-                        <h6>{stat.stat.name}: {stat.base_stat}</h6>
+            return (<li key={i + stat.stat.name}>
+                        {stat.stat.name}: {stat.base_stat}
+                    </li>);
+        });
+        
+        const abilities = pokemon.abilities.map((ability, i) => {
+            return (<li key={i + ability.ability.name}>
+                        <a href={ability.ability.url}>{ability.ability.name}</a>
                     </li>);
         });
         
         const frontImage = {
-            background: `url(${pokemon.front_default}) no-repeat center center`
+            background: `url(${pokemon.sprites.front_default}) no-repeat center center`
         }
         
-        const backImage = {
-            background: `url(${pokemon.back_default}) no-repeat center center`
-        }
+        const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+        
+        // // INSERT AFTER ATTACKING STRENGTHS/WEAKNESSES
+        // <h5>Defense Multipliers</h5>
+        // {defenses}
         
         return (
-          <div className="pokemon">
-            <h4>{pokemon.name}</h4>
+          <div className="battle">
+            <h4>{name}</h4>
             <div className="frontImage" style={frontImage}></div>
-            <div className="backImage" style={backImage}></div>
-            <h5>Stats:</h5>
+            <h5>Types</h5>
+            <p>{types}</p>
+            <h5>Attacking Strengths</h5>
+            <p>{attackStrengths}</p>
+            <h5>Attacking Weaknesses</h5>
+            <p>{attackWeaknesses}</p>
+            <h5>Abilities</h5>
+            <ul>
+                {abilities}
+            </ul>
+            <h5>Stats</h5>
             <ul>
                 {stats}
             </ul>
-            <h5>Types:</h5>
-            <p>{types}</p>
-            <h5>Attacking Strengths and Weaknesses:</h5>
-            <h5>Defense Strengths and Weaknesses:</h5>
+            <div onClick={this.handleMoveClick}>
+                <h5>Moves</h5>
+                {this.state.movesWasClicked ?
+                    <ul>{moves}<h6>(Click to close)</h6></ul> :
+                    <h6>(Click to expand)</h6>}
+            </div>
             <button onClick={this.props.removeSlot1}>Remove</button>
           </div>
         );
@@ -76,13 +347,13 @@ class SingleBattles extends Component {
   render() {
       const slot1 = (Object.keys(this.props.slot1).length !== 0 && this.mapPokemontoSlot(this.props.slot1, 1));
       
-    return (
-      <div className="singleBattleContainer">
-        <h3>Pokemon Analysis:</h3>
-        {slot1}
-      </div>
-    );
-  }
-  }
+        return (
+          <div className="singleBattleContainer">
+            <h3>Pokemon Analysis:</h3>
+            {slot1}
+          </div>
+        );
+    }
+}
 
-export default connect(state => state, {})(SingleBattles);
+export default connect(state => state, { removeSlot1 })(SingleBattles);
