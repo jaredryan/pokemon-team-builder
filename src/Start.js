@@ -8,7 +8,7 @@ import List from './List';
 class Start extends Component {
   render() {
     return (
-      <div>
+      <div className="startContainer">
         <Switch>
             <Route path="/start/pokedex" component={Pokedex}/>
             <Route path="/start/singlebattles" component={SingleBattles}/>

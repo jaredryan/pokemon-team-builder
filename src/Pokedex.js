@@ -16,7 +16,7 @@ class Pokedex extends Component {
     handleSearch(e) {
         e.preventDefault();
         // Axios call + add to list (add this to reducers)
-        this.props.search(this.state.searchInput)
+        this.props.search(this.state.searchInput.toLowerCase())
         this.setState({
             searchInput: ""
         })
@@ -28,18 +28,25 @@ class Pokedex extends Component {
         })
     }
     
-  render() {
-      const pokedexResult = (this.props.searchResult !== {} && <PokedexResult data={this.props.searchResult} />);
+  render() {      
+      const pokedexResult = (Object.keys(this.props.searchResult).length !== 0 && (<PokedexResult data={this.props.searchResult} />));
       
     return (
-      <div>
+      <div className="pokedexContainer">
         <h3>Search</h3>
         <form onSubmit={this.handleSearch}>
-            <input type="text" onChange={this.handleChange} value={this.state.searchInput}/>
+            <input 
+                type="text" 
+                onChange={this.handleChange} 
+                value={this.state.searchInput}
+                placeholder="Pokemon Name"
+            />
         </form>
         {this.props.loading ? 
             <div className="loading"></div>
-            : pokedexResult}
+            : this.props.error !== "" ? 
+                <p>{this.props.error}</p>
+                : pokedexResult}
       </div>
     );
   }

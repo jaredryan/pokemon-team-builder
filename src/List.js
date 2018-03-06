@@ -20,10 +20,10 @@ class List extends Component {
     
   render() {
       const chosenList = this.mapPokemon(this.props.chosen, "chosen");
-      const potentialList = this.mapPokemon(this.props.potentials, "potential");
+      const potentialList = this.mapPokemon(this.props.potentials, "potentials");
        
     return (
-      <div>
+      <div className="listContainer">
         <div className="chosenList">
             <h3>Chosen Pokémon</h3>
             <ul>
@@ -31,7 +31,7 @@ class List extends Component {
             </ul>
         </div>
         <div className="potentialList">
-            <h3>Chosen Potentials</h3>
+            <h3>Pokémon with Potential</h3>
             <ul>
                 {potentialList}
             </ul>

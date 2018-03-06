@@ -26,7 +26,7 @@ class Navbar extends Component {
                 <div className="standard-nav">
                     <Link to="/">
                         <div className="navImage"></div>
-                        <h1>Pokemon Team Builder</h1>
+                        <h1>Pokémon Team Builder</h1>
                     </Link>
                     <ul>
                         <Link to="/start/pokedex"><li>PokéDex</li></Link>
