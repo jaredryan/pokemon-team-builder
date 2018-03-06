@@ -9,7 +9,7 @@ export const search = pokemon => {
             type: "LOADING"
         });
         setTimeout(function(){
-            axios.get(`http://pokeapi.co/api/v2/pokemon/${pokemon}`)
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
             .then(response => {
                 console.dir(response);
                 dispatch({
