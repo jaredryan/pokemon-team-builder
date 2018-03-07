@@ -115,155 +115,8 @@ class DoubleBattles extends Component {
         }
     }
     
-    determineDefenses(type, dict) {
-        switch (type) {
-            case "normal":
-                dict["fighting"] *= 2
-                dict["ghost"] *= 0
-            case "fire":
-                dict["fire"] *= 1/2
-                dict["water"] *= 2
-                dict["grass"] *= 1/2
-                dict["ice"] *= 1/2
-                dict["ground"] *= 2
-                dict["bug"] *= 1/2
-                dict["rock"] *= 2
-                dict["steel"] *= 1/2
-                dict["fairy"] *= 1/2
-            case "water":
-                dict["fire"] *= 1/2
-                dict["water"] *= 1/2
-                dict["electric"] *= 2
-                dict["grass"] *= 2
-                dict["ice"] *= 1/2
-                dict["steel"] *= 1/2
-            case "electric":
-                dict["electric"] *= 1/2
-                dict["ground"] *= 2
-                dict["flying"] *= 1/2
-                dict["steel"] *= 1/2
-            case "grass":
-                dict["fire"] *= 2
-                dict["water"] *= 1/2
-                dict["electric"] *= 1/2
-                dict["grass"] *= 1/2
-                dict["ice"] *= 2
-                dict["poison"] *= 2
-                dict["ground"] *= 1/2
-                dict["flying"] *= 2
-                dict["bug"] *= 2
-            case "ice":
-                dict["fire"] *= 2
-                dict["ice"] *= 1/2
-                dict["fighting"] *= 2
-                dict["rock"] *= 2
-                dict["steel"] *= 2
-            case "fighting":
-                dict["flying"] *= 2
-                dict["psychic"] *= 2
-                dict["bug"] *= 1/2
-                dict["rock"] *= 1/2
-                dict["dark"] *= 1/2
-                dict["fairy"] *= 2
-            case "poison":
-                dict["grass"] *= 1/2
-                dict["fighting"] *= 1/2
-                dict["poison"] *= 1/2
-                dict["ground"] *= 2
-                dict["psychic"] *= 2
-                dict["bug"] *= 1/2
-                dict["fairy"] *= 1/2
-            case "ground":
-                dict["water"] *= 2
-                dict["electric"] *= 0
-                dict["grass"] *= 2
-                dict["ice"] *= 2
-                dict["poison"] *= 1/2
-                dict["rock"] *= 1/2
-            case "flying":
-                dict["electric"] *= 2
-                dict["grass"] *= 1/2
-                dict["ice"] *= 2
-                dict["fighting"] *= 1/2
-                dict["ground"] *= 0
-                dict["bug"] *= 1/2
-                dict["rock"] *= 2
-            case "psychic":
-                dict["fighting"] *= 1/2
-                dict["psychic"] *= 1/2
-                dict["bug"] *= 2
-                dict["ghost"] *= 2
-                dict["dark"] *= 2
-            case "bug":
-                dict["fire"] *= 2
-                dict["grass"] *= 1/2
-                dict["fighting"] *= 1/2
-                dict["ground"] *= 1/2
-                dict["flying"] *= 2
-                dict["rock"] *= 2
-            case "rock":
-                dict["normal"] *= 1/2
-                dict["fire"] *= 1/2
-                dict["water"] *= 2
-                dict["grass"] *= 2
-                dict["fighting"] *= 2
-                dict["poison"] *= 1/2
-                dict["ground"] *= 2
-                dict["flying"] *= 1/2
-                dict["steel"] *= 2
-            case "ghost":
-                dict["normal"] *= 0
-                dict["fighting"] *= 0
-                dict["poison"] *= 1/2
-                dict["bug"] *= 1/2
-                dict["ghost"] *= 2
-                dict["dark"] *= 2
-            case "dragon":
-                dict["fire"] *= 1/2
-                dict["water"] *= 1/2
-                dict["electric"] *= 1/2
-                dict["grass"] *= 1/2
-                dict["ice"] *= 2
-                dict["dragon"] *= 2
-                dict["fairy"] *= 2
-            case "dark":
-                dict["fighting"] *= 2
-                dict["psychic"] *= 0
-                dict["bug"] *= 2
-                dict["ghost"] *= 1/2
-                dict["dark"] *= 1/2
-                dict["fairy"] *= 2
-            case "steel":
-                dict["normal"] *= 1/2
-                dict["fire"] *= 2
-                dict["grass"] *= 1/2
-                dict["ice"] *= 1/2
-                dict["fighting"] *= 2
-                dict["poison"] *= 0
-                dict["ground"] *= 2
-                dict["flying"] *= 1/2
-                dict["psychic"] *= 1/2
-                dict["bug"] *= 1/2
-                dict["rock"] *= 1/2
-                dict["dragon"] *= 1/2
-                dict["steel"] *= 1/2
-                dict["fairy"] *= 1/2
-            case "fairy":
-                dict["fighting"] *= 1/2
-                dict["poison"] *= 2
-                dict["bug"] *= 1/2
-                dict["dragon"] *= 0
-                dict["dark"] *= 1/2
-                dict["steel"] *= 2
-        }
-        return dict;
-    }
-    
-    mapPokemontoSlot(pokemon, slot) {
-        let types = "";
-        let attackStrengths = ""
-        let attackWeaknesses = ""
-        let dict = {
+    determineDefenses(type) {
+        const dict = {
             "normal": 1,
             "fire": 1,
             "water": 1,
@@ -283,17 +136,210 @@ class DoubleBattles extends Component {
             "steel": 1,
             "fairy": 1,
         }
+        for (let t of type) {
+            switch (t) {
+                case "normal":
+                    dict["fighting"] *= 2
+                    dict["ghost"] *= 0
+                    break
+                case "fire":
+                    dict["fire"] *= 1/2
+                    dict["water"] *= 2
+                    dict["grass"] *= 1/2
+                    dict["ice"] *= 1/2
+                    dict["ground"] *= 2
+                    dict["bug"] *= 1/2
+                    dict["rock"] *= 2
+                    dict["steel"] *= 1/2
+                    dict["fairy"] *= 1/2
+                    break
+                case "water":
+                    dict["fire"] *= 1/2
+                    dict["water"] *= 1/2
+                    dict["electric"] *= 2
+                    dict["grass"] *= 2
+                    dict["ice"] *= 1/2
+                    dict["steel"] *= 1/2
+                    break
+                case "electric":
+                    dict["electric"] *= 1/2
+                    dict["ground"] *= 2
+                    dict["flying"] *= 1/2
+                    dict["steel"] *= 1/2
+                    break
+                case "grass":
+                    dict["fire"] *= 2
+                    dict["water"] *= 1/2
+                    dict["electric"] *= 1/2
+                    dict["grass"] *= 1/2
+                    dict["ice"] *= 2
+                    dict["poison"] *= 2
+                    dict["ground"] *= 1/2
+                    dict["flying"] *= 2
+                    dict["bug"] *= 2
+                    break
+                case "ice":
+                    dict["fire"] *= 2
+                    dict["ice"] *= 1/2
+                    dict["fighting"] *= 2
+                    dict["rock"] *= 2
+                    dict["steel"] *= 2
+                    break
+                case "fighting":
+                    dict["flying"] *= 2
+                    dict["psychic"] *= 2
+                    dict["bug"] *= 1/2
+                    dict["rock"] *= 1/2
+                    dict["dark"] *= 1/2
+                    dict["fairy"] *= 2
+                    break
+                case "poison":
+                    dict["grass"] *= 1/2
+                    dict["fighting"] *= 1/2
+                    dict["poison"] *= 1/2
+                    dict["ground"] *= 2
+                    dict["psychic"] *= 2
+                    dict["bug"] *= 1/2
+                    dict["fairy"] *= 1/2
+                    break
+                case "ground":
+                    dict["water"] *= 2
+                    dict["electric"] *= 0
+                    dict["grass"] *= 2
+                    dict["ice"] *= 2
+                    dict["poison"] *= 1/2
+                    dict["rock"] *= 1/2
+                    break
+                case "flying":
+                    dict["electric"] *= 2
+                    dict["grass"] *= 1/2
+                    dict["ice"] *= 2
+                    dict["fighting"] *= 1/2
+                    dict["ground"] *= 0
+                    dict["bug"] *= 1/2
+                    dict["rock"] *= 2
+                    break
+                case "psychic":
+                    dict["fighting"] *= 1/2
+                    dict["psychic"] *= 1/2
+                    dict["bug"] *= 2
+                    dict["ghost"] *= 2
+                    dict["dark"] *= 2
+                    break
+                case "bug":
+                    dict["fire"] *= 2
+                    dict["grass"] *= 1/2
+                    dict["fighting"] *= 1/2
+                    dict["ground"] *= 1/2
+                    dict["flying"] *= 2
+                    dict["rock"] *= 2
+                    break
+                case "rock":
+                    dict["normal"] *= 1/2
+                    dict["fire"] *= 1/2
+                    dict["water"] *= 2
+                    dict["grass"] *= 2
+                    dict["fighting"] *= 2
+                    dict["poison"] *= 1/2
+                    dict["ground"] *= 2
+                    dict["flying"] *= 1/2
+                    dict["steel"] *= 2
+                    break
+                case "ghost":
+                    dict["normal"] *= 0
+                    dict["fighting"] *= 0
+                    dict["poison"] *= 1/2
+                    dict["bug"] *= 1/2
+                    dict["ghost"] *= 2
+                    dict["dark"] *= 2
+                    break
+                case "dragon":
+                    dict["fire"] *= 1/2
+                    dict["water"] *= 1/2
+                    dict["electric"] *= 1/2
+                    dict["grass"] *= 1/2
+                    dict["ice"] *= 2
+                    dict["dragon"] *= 2
+                    dict["fairy"] *= 2
+                    break
+                case "dark":
+                    dict["fighting"] *= 2
+                    dict["psychic"] *= 0
+                    dict["bug"] *= 2
+                    dict["ghost"] *= 1/2
+                    dict["dark"] *= 1/2
+                    dict["fairy"] *= 2
+                    break
+                case "steel":
+                    dict["normal"] *= 1/2
+                    dict["fire"] *= 2
+                    dict["grass"] *= 1/2
+                    dict["ice"] *= 1/2
+                    dict["fighting"] *= 2
+                    dict["poison"] *= 0
+                    dict["ground"] *= 2
+                    dict["flying"] *= 1/2
+                    dict["psychic"] *= 1/2
+                    dict["bug"] *= 1/2
+                    dict["rock"] *= 1/2
+                    dict["dragon"] *= 1/2
+                    dict["steel"] *= 1/2
+                    dict["fairy"] *= 1/2
+                    break
+                case "fairy":
+                    dict["fighting"] *= 1/2
+                    dict["poison"] *= 2
+                    dict["bug"] *= 1/2
+                    dict["dragon"] *= 0
+                    dict["dark"] *= 1/2
+                    dict["steel"] *= 2
+                    break
+            }
+        }
+        return dict;
+    }
+    
+    mapPokemontoSlot(pokemon, slot) {
+        let types = "";
+        let typeArray = [];
+        let attackStrengths = [];
+        let attackWeaknesses = [];
+        
         for (let i = 0; i < pokemon.types.length; i++) {
             if (pokemon.types[i].slot === 1) {
                 types = pokemon.types[i].type.name + ", " + types
             } else {
                 types += pokemon.types[i].type.name + ", ";
             }
-            attackStrengths += pokemon.types[i].type.name + ": " + this.determineAttackStrengths(pokemon.types[i].type.name) + "\n"
-            attackWeaknesses += pokemon.types[i].type.name + ": " + this.determineAttackWeaknesses(pokemon.types[i].type.name) + "\n"
-            dict = this.determineDefenses(pokemon.types[i].type.name, dict);
+            typeArray.push(pokemon.types[i].type.name);
+            attackStrengths.push(pokemon.types[i].type.name + ": " + this.determineAttackStrengths(pokemon.types[i].type.name))
+            attackWeaknesses.push(pokemon.types[i].type.name + "--" + this.determineAttackWeaknesses(pokemon.types[i].type.name))
         }
         types = types.slice(0, types.length - 2);
+        
+        const defenseObjects = this.determineDefenses(typeArray);
+        const defense = [];
+        for (let type in defenseObjects) {
+            if (defenseObjects[type] !== 1) {
+                defense.push(type + ": " + defenseObjects[type] + "x")
+            }
+        }
+        
+        const defenses = defense.map((type, i) => {
+            return <li key={i + type}>{type}</li>
+        })
+        
+        const strengths = attackStrengths.map((type, i) => {
+            return (<li key={i + type}>
+                        {type}
+                    </li>);
+        });
+        
+        const weaknesses = attackWeaknesses.map((type, i) => {
+            return (<li key={i + type}>
+                        {type}
+                    </li>);
+        });
         
         const moves = pokemon.moves.map((move, i) => {
             return (<li key={i + move.move.name}>
@@ -319,6 +365,10 @@ class DoubleBattles extends Component {
         
         const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
         
+        // // INSERT AFTER ATTACKING STRENGTHS/WEAKNESSES
+        // <h5>Defense Multipliers</h5>
+        // {defenses}
+        
         return (
           <div className="battle">
             <h4>{name}</h4>
@@ -326,9 +376,17 @@ class DoubleBattles extends Component {
             <h5>Types</h5>
             <p>{types}</p>
             <h5>Attacking Strengths</h5>
-            <p>{attackStrengths}</p>
+            <ul>
+                {strengths}
+            </ul>
             <h5>Attacking Weaknesses</h5>
-            <p>{attackWeaknesses}</p>
+            <ul>
+                {weaknesses}
+            </ul>
+            <h5>Defense Multipliers</h5>
+            <ul>
+                {defenses}
+            </ul>
             <h5>Abilities</h5>
             <ul>
                 {abilities}

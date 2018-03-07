@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPokemon, addPokemontoPotential } from './redux';
+import { addPokemon, addPokemontoPotential, clearSearch } from './redux';
 
 class PokedexResult extends Component {
     constructor() {
@@ -79,9 +79,11 @@ class PokedexResult extends Component {
             <button onClick={this.props.addPokemon}>Add to Chosen List</button>
             <br/>
             <button onClick={this.props.addPokemontoPotential}>Add to Potential List</button>
+            <br/>
+            <button onClick={this.props.clearSearch}>Clear</button>
           </div>
         );
     }
 };
 
-export default connect(state => state, { addPokemon, addPokemontoPotential })(PokedexResult);
+export default connect(state => state, { addPokemon, addPokemontoPotential, clearSearch })(PokedexResult);
