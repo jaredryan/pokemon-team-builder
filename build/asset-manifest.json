@@ -1,6 +1,11 @@
 {
-  "main.css": "static/css/main.ed68fc1e.css",
-  "main.css.map": "static/css/main.ed68fc1e.css.map",
-  "main.js": "static/js/main.485c7632.js",
-  "main.js.map": "static/js/main.485c7632.js.map"
+  "main.css": "static/css/main.9f41f2ed.css",
+  "main.css.map": "static/css/main.9f41f2ed.css.map",
+  "main.js": "static/js/main.3dd59e42.js",
+  "main.js.map": "static/js/main.3dd59e42.js.map",
+  "static/media/doubleBattle.jpg": "static/media/doubleBattle.98af6784.jpg",
+  "static/media/mewtwo.png": "static/media/mewtwo.0363558a.png",
+  "static/media/pokemonBanner.png": "static/media/pokemonBanner.49255cb2.png",
+  "static/media/pokemonNav.jpg": "static/media/pokemonNav.5b98f0ab.jpg",
+  "static/media/pokken.jpg": "static/media/pokken.40da3b0a.jpg"
 }
